@@ -52,13 +52,13 @@ def cart():
         product_dict = {
             'product': stripe_product,
             'price': float(stripe.Price.retrieve(stripe_product['metadata']['price_id'])['unit_amount']) / 100,
-            'quantity': i.quantity
+            'quantity': i.quantity,
             'key': i.product_key
         }
         cart_items.append(product_dict)
         subtotal+= product_dict['price'] * product_dict['quantity']
     context = {
-        'cart': cart_items
+        'cart': cart_items,
         'subtotal': subtotal,
     }
     return render_template('shop/cart.html', **context)
